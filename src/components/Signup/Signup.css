@@ -1,0 +1,89 @@
+.signup {
+    background-color: #80a7a2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 92vh;
+    color: whitesmoke;
+}
+
+.signup__heading {
+    margin-top: 8%;
+    margin-bottom: 5%;
+    font-size: 1rem;
+}
+
+span {
+    margin-bottom: 5px;
+}
+
+.signup__form form {
+    display: flex;
+    padding: 3rem 4rem;
+    background-color: #ead5dc;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid lightgray;
+    border-radius: 15px;
+    color: lightcoral;
+    font-weight: bold;
+}
+
+.signup__form input {
+    margin-bottom: 0.9rem;
+    width: 500px;
+    padding: 0.6rem;
+    border: none;
+    outline: none;
+    border-radius: 0.3rem;
+    font-size: 0.9;
+}
+
+.signup__submit {
+    margin-top: 20px !important;
+    color: whitesmoke !important;
+}
+
+@media only screen and (max-width: 1000px) {
+    .signup__form form {
+        padding: 3rem 3.5rem;
+    }
+    .signup__form input {
+        width: 400px;
+        font-size: 0.8;
+    }
+    .signup__heading {
+        font-size: 0.8rem;
+    }
+  }
+
+@media only screen and (max-width: 800px) {
+    .signup__form form {
+        padding: 3rem 4rem;
+    }
+    .signup__form input {
+        width: 300px;
+        font-size: 0.7;
+
+    }
+    .signup__heading {
+        font-size: 0.7rem;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .signup__form form {
+        padding: 3rem 3rem;
+    }
+    .signup__form input {
+        width: 200px;
+        font-size: 0.6;
+
+    }
+    .signup__heading {
+        font-size: 0.6rem;
+    }
+  }
+
+
