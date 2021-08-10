@@ -1,11 +1,21 @@
 import { Button } from '@material-ui/core'
 import React, {useState} from 'react'
 import './Login.css'
+import {auth} from '../../firebase'
 
 const Login = () => {
 
+    
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    
+    const signIn = (e) => {
+        e.preventDefault()
+
+        auth.signInWithEmailAndPassword(email, password)
+        .then(() => console.log('User Sign In'))
+        .catch((err) => alert(err.message))
+    }
 
     return (
         <div className='login'>
@@ -16,7 +26,7 @@ const Login = () => {
                 <form>
                     <span>Email Address:</span><input className='login__email' type='email' title='email' value={email} onChange={(e) => setEmail(e.target.value)}/><br />
                     <span>Password:</span><input className='login__password' type='password' title='password' value={password} onChange={(e) => setPassword(e.target.value)}/> <br />
-                    <Button type='submit' onClick={(e) => {e.preventDefault()}} className='login__submit' variant='contained' color='secondary'>Login</Button>
+                    <Button disabled={!email || !password} type='submit' onClick={(e) => {signIn(e)}} className='login__submit' variant='contained' color='secondary'>Login</Button>
                 </form>
             </div>
         </div>

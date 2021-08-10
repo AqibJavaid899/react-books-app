@@ -56,7 +56,7 @@ const Home = () => {
                 <div className='home__bookList'>
                     {books.map(({id, book}) => (
                         <div className='home__bookData' key={id}>
-                            <Link to='/addAuthor'><Button variant='outlined' color='primary'>{book.name}</Button></Link>
+                            <Link to={`/bookDetails/${id}`} ><Button variant='outlined' color='primary'>{book.name}</Button></Link>
                         </div>
 
                     ))}

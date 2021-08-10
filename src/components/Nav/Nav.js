@@ -2,8 +2,14 @@ import React, { useState } from 'react'
 import Button from '@material-ui/core/Button'
 import './Nav.css'
 import { Link } from 'react-router-dom'
+import {auth} from '../../firebase'
 
 const Nav = () => {
+
+    const logOut = (e) => {
+        e.preventDefault()
+        auth.signOut()
+    }
     
     return (
         <div className='nav'>
@@ -22,6 +28,7 @@ const Nav = () => {
                 <Link to="/signup"> 
                     <button className='nav__signup'>Sign Up</button>
                 </Link>
+                {auth ? <button onClick={(e) => {logOut(e)}} className='nav__logout'>Logout</button> : null}
             </div>
         </div>
     )

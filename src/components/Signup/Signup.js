@@ -1,12 +1,41 @@
 import { Button } from '@material-ui/core'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './Signup.css'
+import {auth} from '../../firebase'
 
 const Signup = () => {
 
-    const [userName, setUserName] = useState('')
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [signInUser, setSignInUser] = useState(null)
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((authUser) => {
+            if(authUser) {
+                // It means that the user has logged into its account
+                console.log(authUser)
+                setSignInUser(authUser)
+            } else {
+                // It means that the user has logged out of its account
+                setSignInUser(null)
+            }
+        }) 
+        // Calling the cleanup function to remove the Auth Event after running it
+        return () => unsubscribe()
+    }, [name, signInUser])
+
+    const signUp = (e) => {
+        e.preventDefault()
+        auth
+        .createUserWithEmailAndPassword(email, password)
+        .then(authUser => {
+            authUser.user.updateProfile({
+                displayName: name
+            })
+        })
+        .catch(err => alert(err.message))
+    }
 
     return (
         <div className='signup'>
@@ -15,10 +44,11 @@ const Signup = () => {
             </div>
             <div className='signup__form'>
                 <form>
-                    <span>Username:</span><input className='signup__user' type='text' title='userName' value={userName} onChange={(e) => setUserName(e.target.value)}/><br />
-                    <span>Email Address:</span><input className='signup__email' type='email' title='email' value={email} onChange={(e) => setEmail(e.target.value)}/> <br />
+                    <span>Username:</span><input className='signup__user' type='text' title='name' value={name} onChange={(e) => setName(e.target.value)}/>
+                    <span>Email Address:</span><input className='signup__email' type='email' title='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
                     <span>Password:</span><input className='signup__password' type='password' title='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
-                    <Button type='submit' onClick={(e) => {e.preventDefault()}} className='signup__submit' variant='contained' color='secondary'>Create Account</Button>
+                    <Button disabled={!name || !email || !password} 
+                    type='submit' onClick={(e) => {signUp(e)}} className='signup__submit' variant='contained' color='secondary'>Create Account</Button>
                 </form>
             </div>
         </div>

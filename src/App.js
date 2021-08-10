@@ -6,6 +6,7 @@ import Home from './components/Home/Home';
 import Signup from './components/Signup/Signup';
 import Login from './components/Login/Login';
 import AuthorForm from './components/addAuthor/AuthorForm';
+import BookDetails from './components/BookDetails/BookDetails';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/signup' exact component={Signup} />
           <Route path='/login' exact component={Login} />
           <Route path='/addAuthor' exact component={AuthorForm} />
+          <Route path='/bookDetails/:bookId' exact component={BookDetails} />
         </Switch>
       </Router>
     </div>
