@@ -2,6 +2,8 @@ import { Button } from '@material-ui/core'
 import React, {useState} from 'react'
 import './Login.css'
 import {auth} from '../../firebase'
+import { useDispatch } from 'react-redux'
+import { signInUser } from '../../redux/actions/userActions'
 
 const Login = () => {
 
@@ -13,7 +15,11 @@ const Login = () => {
         e.preventDefault()
 
         auth.signInWithEmailAndPassword(email, password)
-        .then(() => console.log('User Sign In'))
+        .then((authUser) => {
+            console.log('User Sign In')
+            console.log(authUser)
+            // useDispatch(signInUser())
+        })
         .catch((err) => alert(err.message))
     }
 
