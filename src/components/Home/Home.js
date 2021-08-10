@@ -3,6 +3,7 @@ import './Home.css'
 import {db,  auth} from '../../firebase.js'
 import { Button } from '@material-ui/core'
 import firebase from 'firebase'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
 
@@ -15,7 +16,7 @@ const Home = () => {
     const [temp, setTemp] = useState('')
 
     useEffect(() => {
-        db.collection('books').onSnapshot(snapshot => {
+        db.collection('books').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
             setBooks(snapshot.docs.map(doc => ({
                 id: doc.id,
                 book: doc.data()
@@ -25,7 +26,6 @@ const Home = () => {
             setAuthors(snapshot.docs.map(doc => ({
                 id: doc.id,
                 name: doc.data().name
-                // console.log(doc.data().name)
             })))
         })
     }, [])
@@ -55,7 +55,9 @@ const Home = () => {
                 </div>
                 <div className='home__bookList'>
                     {books.map(({id, book}) => (
-                        <div className='home__bookData' key={id}>{book.name}</div>
+                        <div className='home__bookData' key={id}>
+                            <Link to='/addAuthor'><Button variant='outlined' color='primary'>{book.name}</Button></Link>
+                        </div>
 
                     ))}
                 </div>

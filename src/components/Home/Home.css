@@ -13,25 +13,29 @@
     margin-bottom: 3%;
     font-size: 1rem;
     text-align: center;
+    color: grey;
 }
 
 .home__bookList {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+    flex-shrink: 1;
+    flex-wrap: wrap;
 }
 
 .home__bookData {
-    padding: 0.7rem;
     color: red;
-    border: 1px solid red;
-    margin: 1rem;
+    margin: 0.5rem;
     border-radius: 0.5rem;
+}
+.home__bookData Button {
+    text-decoration: none !important;
+    text-transform: uppercase;
 }
 
 .home__bookForm form {
-    /* min-height: 200px; */
-    padding: 1rem 2rem;
+    padding: 2rem 3rem;
     background-color: #ead5dc;
     display: flex;
     flex-direction: column;
@@ -46,15 +50,46 @@
 
 .home__bookForm input, select {
     margin-bottom: 0.9rem;
-    width: 300px;
+    width: 350px;
     padding: 0.4rem;
     border: none;
     outline: none;
     border-radius: 0.3rem;
     font-size: 0.9;
+    text-align: center;
 }
 
 .home__submit {
     margin-top: 20px !important;
     color: whitesmoke !important;
 }
+
+@media only screen and (max-width: 1000px) {
+    .home__bookForm form {
+        padding: 1.5rem 2.5rem;
+    }
+    .home__bookForm input,select {
+        width: 300px;
+        font-size: 0.8;
+    }
+  }
+
+@media only screen and (max-width: 800px) {
+    .home__bookForm form {
+        padding: 1.2rem 2rem;
+    }
+    .home__bookForm input,select {
+        width: 270px;
+        font-size: 0.8;
+    }
+}  
+
+@media only screen and (max-width: 600px) {
+    .home__bookForm form {
+        padding: 1rem 2rem;
+    }
+    .home__bookForm input, select {
+        width: 250px;
+        font-size: 0.8;
+    }
+  }
