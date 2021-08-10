@@ -13,6 +13,9 @@ const Nav = () => {
                 </Link>
             </div>
             <div className='nav__right'>
+            <Link to="/addAuthor"> 
+                    <button className="nav__addAuthor">Add Author</button>
+                </Link>
                 <Link to="/login"> 
                     <button className="nav__login">Login</button>
                 </Link>

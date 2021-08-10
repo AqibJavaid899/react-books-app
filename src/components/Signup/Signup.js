@@ -4,9 +4,9 @@ import './Signup.css'
 
 const Signup = () => {
 
-    const [userName, setUserName] = useState<string>('')
-    const [email, setEmail] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
+    const [userName, setUserName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     return (
         <div className='signup'>

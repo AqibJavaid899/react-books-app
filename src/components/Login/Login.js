@@ -4,8 +4,8 @@ import './Login.css'
 
 const Login = () => {
 
-    const [email, setEmail] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     return (
         <div className='login'>
