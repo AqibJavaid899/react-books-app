@@ -1,12 +1,12 @@
-import React from 'react';
-import './App.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Nav from './components/Nav/Nav';
-import Home from './components/Home/Home';
-import Signup from './components/Signup/Signup';
-import Login from './components/Login/Login';
-import AuthorForm from './components/addAuthor/AuthorForm';
-import BookDetails from './components/BookDetails/BookDetails';
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Nav from "./components/Nav/Nav";
+import Home from "./components/Home/Home";
+import Signup from "./components/Signup/Signup";
+import Login from "./components/Login/Login";
+import AuthorForm from "./components/addAuthor/AuthorForm";
+// import BookDetails from "./components/BookDetails/BookDetails";
 
 function App() {
   return (
@@ -14,11 +14,11 @@ function App() {
       <Router>
         <Nav />
         <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/signup' exact component={Signup} />
-          <Route path='/login' exact component={Login} />
-          <Route path='/addAuthor' exact component={AuthorForm} />
-          <Route path='/bookDetails/:bookId' exact component={BookDetails} />
+          <Route path="/" exact component={Home} />
+          <Route path="/signup" exact component={Signup} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/addAuthor" exact component={AuthorForm} />
+          {/* <Route path='/bookDetails/:bookId' exact component={BookDetails} /> */}
         </Switch>
       </Router>
     </div>
