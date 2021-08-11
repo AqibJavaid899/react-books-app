@@ -55,19 +55,22 @@ const Home = () => {
     setAuthor("");
   };
 
-  const bookSelected = (book) => {
-    setSelectedBook(book);
+  const bookSelected = (selectedBook) => {
+    console.log("In Book Selected...");
+    setSelectedBook(selectedBook);
     setIsClicked(true);
+    console.log("Selected Book is : ", selectedBook);
     setAuthorBookList(
       books
-        .flatMap((item) =>
-          item.book.author === book.author && item.book.name !== book.name
-            ? item.book.name
+        .flatMap((book) =>
+          book.book.author === selectedBook.book.author &&
+          selectedBook.book.name !== book.book.name
+            ? book.book.name
             : null
         )
         .filter((val) => val !== null)
     );
-    console.log(authorBookList);
+    console.log("Author List is : ", authorBookList);
   };
 
   const deleteBook = (e) => {
