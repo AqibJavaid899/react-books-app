@@ -3,41 +3,29 @@ import React, { useState, useEffect } from "react";
 import "./Signup.css";
 import { auth } from "../../firebase";
 import { Link, useHistory } from "react-router-dom";
+import { authStateChanged, userSignUp } from "../../utils/helperFunctions";
+import { useDispatch } from "react-redux";
 
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [signInUser, setSignInUser] = useState(null);
+  // const [signInUser, setSignInUser] = useState(null);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        // It means that the user has logged into its account
-        console.log(authUser);
-        setSignInUser(authUser);
-      } else {
-        // It means that the user has logged out of its account
-        setSignInUser(null);
-      }
+      authStateChanged(dispatch, authUser);
     });
     // Calling the cleanup function to remove the Auth Event after running it
     return () => unsubscribe();
-  }, [name, signInUser]);
+  }, [name]);
 
   const signUp = (e) => {
     e.preventDefault();
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((authUser) => {
-        authUser.user.updateProfile({
-          displayName: name,
-        });
-        console.log(authUser);
-      })
-      .then(() => history.push("/login"))
-      .catch((err) => alert(err.message));
+    // Calling Helper Functions for creating user account
+    userSignUp(name, email, password, history);
 
     setName("");
     setEmail("");

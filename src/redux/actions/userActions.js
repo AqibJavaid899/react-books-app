@@ -1,4 +1,5 @@
 import { actionTypes } from "../constants";
+import { auth } from "../../firebase";
 
 export const signInUser = (authUser) => async (dispatch) => {
   console.log("At Action Auth User is : ", authUser);
@@ -6,6 +7,6 @@ export const signInUser = (authUser) => async (dispatch) => {
 };
 
 export const signOutUser = () => async (dispatch) => {
-  console.log("At Sign Out Action Creator...");
+  auth.signOut();
   dispatch({ type: actionTypes.REMOVE_SIGN_IN_USER, payload: {} });
 };

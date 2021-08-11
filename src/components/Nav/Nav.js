@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import "./Nav.css";
 import { Link } from "react-router-dom";
-import { auth } from "../../firebase";
 import { useSelector, useDispatch } from "react-redux";
 import { signOutUser } from "../../redux/actions/userActions";
 
 const Nav = () => {
+  // Dispatching Sign-In User from the Global Store
   let authUser = useSelector((state) => state.userStore);
   const dispatch = useDispatch();
 
+  // Logging user out and removing it from the Global Store
   const logOut = (e) => {
     e.preventDefault();
-    auth.signOut();
     dispatch(signOutUser());
   };
 
