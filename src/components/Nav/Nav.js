@@ -8,6 +8,7 @@ import { signOutUser } from "../../redux/actions/userActions";
 const Nav = () => {
   // Dispatching Sign-In User from the Global Store
   let authUser = useSelector((state) => state.userStore);
+  console.log("In Nav Comp : ", authUser);
   const dispatch = useDispatch();
 
   // Logging user out and removing it from the Global Store
@@ -24,9 +25,11 @@ const Nav = () => {
         </Link>
       </div>
       <div className="nav__right">
-        <Link to="/addAuthor">
-          <button className="nav__addAuthor">Add Author</button>
-        </Link>
+        {!(Object.keys(authUser).length === 0) ? (
+          <Link to="/addAuthor">
+            <button className="nav__addAuthor">Add Author</button>
+          </Link>
+        ) : null}
 
         {Object.keys(authUser).length === 0 ? (
           <Link to="/login">

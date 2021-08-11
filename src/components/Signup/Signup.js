@@ -20,7 +20,7 @@ const Signup = () => {
     });
     // Calling the cleanup function to remove the Auth Event after running it
     return () => unsubscribe();
-  }, [name]);
+  }, [name, dispatch]);
 
   const signUp = (e) => {
     e.preventDefault();

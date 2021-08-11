@@ -103,52 +103,54 @@ const Home = () => {
         </div>
 
         <div className="home__bookForm">
-          <form>
-            <span>Book Name:</span>
-            <input
-              className="home__bookName"
-              type="text"
-              title="bookName"
-              value={bookName}
-              onChange={(e) => setBookName(e.target.value)}
-            />
-            <span>Genre:</span>
-            <input
-              className="home__bookGenre"
-              type="text"
-              title="genre"
-              value={genre}
-              onChange={(e) => setGenre(e.target.value)}
-            />
-            <span>Author:</span>
+          {!(Object.keys(authUser).length === 0) ? (
+            <form>
+              <span>Book Name:</span>
+              <input
+                className="home__bookName"
+                type="text"
+                title="bookName"
+                value={bookName}
+                onChange={(e) => setBookName(e.target.value)}
+              />
+              <span>Genre:</span>
+              <input
+                className="home__bookGenre"
+                type="text"
+                title="genre"
+                value={genre}
+                onChange={(e) => setGenre(e.target.value)}
+              />
+              <span>Author:</span>
 
-            <select
-              className="home__bookAuthor"
-              title="author"
-              value={author}
-              onChange={(e) => {
-                setAuthor(e.target.value);
-              }}
-            >
-              {authors.map(({ id, name }) => (
-                <option id={id} value={name}>
-                  {name}
-                </option>
-              ))}
-            </select>
-            <Button
-              disabled={!bookName || !genre || !author}
-              type="submit"
-              onClick={(e) => {
-                addBook(e);
-              }}
-              className="home__submit"
-              variant="contained"
-              color="primary"
-            >
-              Add Book
-            </Button>
-          </form>
+              <select
+                className="home__bookAuthor"
+                title="author"
+                value={author}
+                onChange={(e) => {
+                  setAuthor(e.target.value);
+                }}
+              >
+                {authors.map(({ id, name }) => (
+                  <option id={id} value={name}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+              <Button
+                disabled={!bookName || !genre || !author}
+                type="submit"
+                onClick={(e) => {
+                  addBook(e);
+                }}
+                className="home__submit"
+                variant="contained"
+                color="primary"
+              >
+                Add Book
+              </Button>
+            </form>
+          ) : null}
         </div>
       </div>
 
