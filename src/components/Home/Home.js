@@ -164,7 +164,7 @@ const Home = () => {
               <h4>All books by this Author:</h4>
               {authorBookList.map((book) => (
                 <ul className="home__drawerList">
-                  <li>{book}</li>
+                  <li key={book}>{book}</li>
                 </ul>
               ))}
             </div>

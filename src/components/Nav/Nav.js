@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { signOutUser } from "../../redux/actions/userActions";
 
 const Nav = () => {
-  // Dispatching Sign-In User from the Global Store
+  // Fetching Sign-In User from the Global Store
   let authUser = useSelector((state) => state.userStore);
   console.log("In Nav Comp : ", authUser);
   const dispatch = useDispatch();
