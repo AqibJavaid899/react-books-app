@@ -3,7 +3,7 @@ import "./Home.css";
 import { db, auth } from "../../firebase.js";
 import { Button } from "@material-ui/core";
 import firebase from "firebase";
-import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
@@ -14,7 +14,9 @@ const Home = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [authorBookList, setAuthorBookList] = useState([]);
-  const [temp, setTemp] = useState("");
+
+  let authUser = useSelector((state) => state.userStore);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     db.collection("books")
@@ -79,7 +81,11 @@ const Home = () => {
       <div className="home">
         <div className="home__content">
           <div className="home__heading">
-            <h2>List of Books</h2>
+            {Object.keys(authUser).length === 0 ? (
+              <h2>Reading List for Users!</h2>
+            ) : (
+              <h2>{`Hey ${authUser.displayName}, Reading List for you!`}</h2>
+            )}
           </div>
           <div className="home__bookList">
             {books.map((book) => (
@@ -144,7 +150,6 @@ const Home = () => {
             </Button>
           </form>
         </div>
-        {/* <h3>{author}</h3> */}
       </div>
 
       {isClicked ? (
