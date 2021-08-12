@@ -38,12 +38,14 @@ const Home = () => {
     e.preventDefault();
     let id = uuidv4();
     dispatch(addBookToStore(books, id, bookName, genre, author));
+    // dispatch(setBooksStore())
     setBookName("");
     setGenre("");
     setAuthor("");
   };
 
   const bookSelected = (selectedBook) => {
+    console.log("Selected Book is : ",selectedBook)
     setSelectedBook(selectedBook);
     setIsClicked(true);
     setAuthorBookList(selectedAuthorBooks(selectedBook, books));
@@ -51,9 +53,10 @@ const Home = () => {
 
   const deleteBook = (e) => {
     e.preventDefault();
-    // deleteBookFromStore(selected)
-    db.collection("books").doc(selectedBook.id).delete();
-    dispatch(setBooksStore());
+    // console.log("Book ID is of type : ",typeof(selectedBook.id))
+    dispatch(deleteBookFromStore(selectedBook.id))
+    
+    // dispatch(setBooksStore());
     setIsClicked(false);
   };
 

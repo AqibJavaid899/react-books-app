@@ -5,7 +5,7 @@ import firebase from "firebase";
 
 export const setBooksStore = () => async (dispatch) => {
   let books = [];
-  await db
+  db
     .collection("books")
     .orderBy("timestamp", "desc")
     .onSnapshot((snapshot) => {
@@ -21,7 +21,7 @@ export const addBookToStore =
     // console.log("Book List before adding new book is : ", books);
     const bookNames = books.map((book) => book.book.name);
     if (!bookNames.includes(bookName)) {
-      db.collection("books")
+      await db.collection("books")
         .add({
           docId: id,
           name: bookName,
@@ -31,10 +31,8 @@ export const addBookToStore =
         })
         .then((docRef) => {
           ID = docRef.id;
-          // console.log("New ID is : ", ID);
-        });
-    }
-    dispatch({
+          // console.log("ID is of type : ", typeof(ID));
+        }).then(() => dispatch({
       type: actionTypes.ADD_BOOK,
       payload: {
         id: ID,
@@ -45,7 +43,13 @@ export const addBookToStore =
           author: author,
         },
       },
-    });
+    }));
+    }
+    
   };
 
-export const deleteBookFromStore = () => {};
+export const deleteBookFromStore = (bookId) => async(dispatch) => {
+  console.log("Deleted ID is : ",bookId)
+  db.collection("books").doc(bookId).delete();
+  dispatch({ type: actionTypes.DELETE_BOOK, payload: bookId })
+};
