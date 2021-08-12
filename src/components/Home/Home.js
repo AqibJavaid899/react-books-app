@@ -4,9 +4,11 @@ import { db, auth } from "../../firebase.js";
 import { Button } from "@material-ui/core";
 import firebase from "firebase";
 import { useSelector, useDispatch } from "react-redux";
+import { selectedAuthorBooks } from "../../utils/helperFunctions";
+import { setBooksStore } from "../../redux/actions/bookActions";
 
 const Home = () => {
-  const [books, setBooks] = useState([]);
+  // const [books, setBooks] = useState([]);
   const [bookName, setBookName] = useState("");
   const [genre, setGenre] = useState("");
   const [authors, setAuthors] = useState([]);
@@ -17,18 +19,21 @@ const Home = () => {
 
   let authUser = useSelector((state) => state.userStore);
   const dispatch = useDispatch();
+  let books = useSelector((state) => state.bookStore);
+  console.log("Books Data from Redux is : ", books);
 
   useEffect(() => {
-    db.collection("books")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) => {
-        setBooks(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            book: doc.data(),
-          }))
-        );
-      });
+    // db.collection("books")
+    //   .orderBy("timestamp", "desc")
+    //   .onSnapshot((snapshot) => {
+    //     setBooks(
+    //       snapshot.docs.map((doc) => ({
+    //         id: doc.id,
+    //         book: doc.data(),
+    //       }))
+    //     );
+    //   });
+    dispatch(setBooksStore());
     db.collection("author").onSnapshot((snapshot) => {
       setAuthors(
         snapshot.docs.map((doc) => ({
@@ -37,7 +42,7 @@ const Home = () => {
         }))
       );
     });
-  }, []);
+  }, [dispatch]);
 
   const addBook = (e) => {
     e.preventDefault();
@@ -56,21 +61,9 @@ const Home = () => {
   };
 
   const bookSelected = (selectedBook) => {
-    console.log("In Book Selected...");
     setSelectedBook(selectedBook);
     setIsClicked(true);
-    console.log("Selected Book is : ", selectedBook);
-    setAuthorBookList(
-      books
-        .flatMap((book) =>
-          book.book.author === selectedBook.book.author &&
-          selectedBook.book.name !== book.book.name
-            ? book.book.name
-            : null
-        )
-        .filter((val) => val !== null)
-    );
-    console.log("Author List is : ", authorBookList);
+    setAuthorBookList(selectedAuthorBooks(selectedBook, books));
   };
 
   const deleteBook = (e) => {

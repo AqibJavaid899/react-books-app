@@ -2,7 +2,7 @@ import { Button } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import "./Signup.css";
 import { auth } from "../../firebase";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { authStateChanged, userSignUp } from "../../utils/helperFunctions";
 import { useDispatch } from "react-redux";
 
@@ -10,17 +10,16 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [signInUser, setSignInUser] = useState(null);
   const history = useHistory();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      authStateChanged(dispatch, authUser);
-    });
-    // Calling the cleanup function to remove the Auth Event after running it
-    return () => unsubscribe();
-  }, [name, dispatch]);
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged((authUser) => {
+  //     authStateChanged(dispatch, authUser);
+  //   });
+  //   // Calling the cleanup function to remove the Auth Event after running it
+  //   return () => unsubscribe();
+  // }, [name, dispatch]);
 
   const signUp = (e) => {
     e.preventDefault();

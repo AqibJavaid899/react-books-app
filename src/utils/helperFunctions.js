@@ -22,3 +22,14 @@ export const authStateChanged = (dispatch, authUser) => {
     dispatch(signOutUser);
   }
 };
+
+export const selectedAuthorBooks = (selectedBook, books) => {
+  return books
+    .flatMap((book) =>
+      book.book.author === selectedBook.book.author &&
+      selectedBook.book.name !== book.book.name
+        ? book.book.name
+        : null
+    )
+    .filter((val) => val !== null);
+};
