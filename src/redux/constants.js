@@ -3,4 +3,5 @@ export const actionTypes = {
   REMOVE_SIGN_IN_USER: "REMOVE_SIGN_IN_USER",
   ADD_BOOK: "ADD_BOOK",
   SET_BOOKS: "SET_BOOKS",
+  DELETE_BOOK: "DELETE_BOOK",
 };

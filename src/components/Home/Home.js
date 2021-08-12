@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./Home.css";
 import { db, auth } from "../../firebase.js";
 import { Button } from "@material-ui/core";
-import firebase from "firebase";
 import { useSelector, useDispatch } from "react-redux";
 import { selectedAuthorBooks } from "../../utils/helperFunctions";
-import { setBooksStore } from "../../redux/actions/bookActions";
+import { addBookToStore, deleteBookFromStore, setBooksStore } from "../../redux/actions/bookActions";
+import { v4 as uuidv4 } from "uuid";
 
 const Home = () => {
   // const [books, setBooks] = useState([]);
@@ -23,16 +23,6 @@ const Home = () => {
   console.log("Books Data from Redux is : ", books);
 
   useEffect(() => {
-    // db.collection("books")
-    //   .orderBy("timestamp", "desc")
-    //   .onSnapshot((snapshot) => {
-    //     setBooks(
-    //       snapshot.docs.map((doc) => ({
-    //         id: doc.id,
-    //         book: doc.data(),
-    //       }))
-    //     );
-    //   });
     dispatch(setBooksStore());
     db.collection("author").onSnapshot((snapshot) => {
       setAuthors(
@@ -46,15 +36,8 @@ const Home = () => {
 
   const addBook = (e) => {
     e.preventDefault();
-    const bookNames = books.map((book) => book.book.name);
-    if (!bookNames.includes(bookName)) {
-      db.collection("books").add({
-        name: bookName,
-        genre: genre,
-        author: author,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      });
-    }
+    let id = uuidv4();
+    dispatch(addBookToStore(books, id, bookName, genre, author));
     setBookName("");
     setGenre("");
     setAuthor("");
@@ -68,7 +51,9 @@ const Home = () => {
 
   const deleteBook = (e) => {
     e.preventDefault();
+    // deleteBookFromStore(selected)
     db.collection("books").doc(selectedBook.id).delete();
+    dispatch(setBooksStore());
     setIsClicked(false);
   };
 
@@ -84,14 +69,14 @@ const Home = () => {
             )}
           </div>
           <div className="home__bookList">
-            {books.map((book) => (
-              <div className="home__bookData" key={book.id}>
+            {books?.map((book) => (
+              <div className="home__bookData" key={book.docId}>
                 <Button
                   onClick={() => bookSelected(book)}
                   variant="outlined"
                   color="primary"
                 >
-                  {book.book.name}
+                  {book?.book?.name}
                 </Button>
               </div>
             ))}

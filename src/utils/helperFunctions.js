@@ -1,4 +1,4 @@
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { signInUser, signOutUser } from "../redux/actions/userActions";
 
 export const userSignUp = (name, email, password, history) => {
@@ -26,9 +26,9 @@ export const authStateChanged = (dispatch, authUser) => {
 export const selectedAuthorBooks = (selectedBook, books) => {
   return books
     .flatMap((book) =>
-      book.book.author === selectedBook.book.author &&
-      selectedBook.book.name !== book.book.name
-        ? book.book.name
+      book?.book?.author === selectedBook?.book?.author &&
+      selectedBook?.book?.name !== book?.book?.name
+        ? book?.book?.name
         : null
     )
     .filter((val) => val !== null);
