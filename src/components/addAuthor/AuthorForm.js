@@ -1,10 +1,9 @@
 import { Button } from "@material-ui/core";
 import React, { useState } from "react";
 import "./AuthorForm.css";
-import { db, auth } from "../../firebase.js";
-import firebase from "firebase";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { addAuthorToStore } from "../../redux/actions/authorActions";
 
 const AuthorForm = () => {
   const [author, setAuthor] = useState("");
@@ -13,12 +12,10 @@ const AuthorForm = () => {
   let authUser = useSelector((state) => state.userStore);
   const dispatch = useDispatch();
 
-  const addAuthor = (e) => {
+  const addAuthor = async (e) => {
+    console.log("In Add Author Option!!");
     e.preventDefault();
-    db.collection("author").add({
-      name: author,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    });
+    await dispatch(addAuthorToStore(author));
     setAuthor("");
   };
 

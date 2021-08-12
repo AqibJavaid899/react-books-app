@@ -9,7 +9,6 @@ import AuthorForm from "./components/addAuthor/AuthorForm";
 import { auth } from "./firebase";
 import { authStateChanged } from "./utils/helperFunctions";
 import { useDispatch } from "react-redux";
-import { setBooksStore } from "./redux/actions/bookActions";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,7 +17,6 @@ function App() {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       authStateChanged(dispatch, authUser);
     });
-    // dispatch(setBooksStore);
     // Calling the cleanup function to remove the Auth Event after running it
     return () => unsubscribe();
   }, [dispatch]);

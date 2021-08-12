@@ -4,4 +4,6 @@ export const actionTypes = {
   ADD_BOOK: "ADD_BOOK",
   SET_BOOKS: "SET_BOOKS",
   DELETE_BOOK: "DELETE_BOOK",
+  SET_AUTHORS: "SET_AUTHORS",
+  ADD_AUTHOR: "ADD_AUTHOR",
 };
