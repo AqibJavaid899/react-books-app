@@ -15,7 +15,6 @@ export const setBooksStore = () => async (dispatch) => {
 export const addBookToStore =
   (books, bookName, genre, author) => async (dispatch) => {
     console.log("ADD BOOKS ACTIONS...");
-    let ID = null;
     const bookNames = books.map((book) => book.book.name);
     if (!bookNames.includes(bookName)) {
       db.collection("books")

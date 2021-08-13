@@ -13,7 +13,6 @@ const AuthorForm = () => {
   const dispatch = useDispatch();
 
   const addAuthor = async (e) => {
-    console.log("In Add Author Option!!");
     e.preventDefault();
     await dispatch(addAuthorToStore(author));
     setAuthor("");

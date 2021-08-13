@@ -7,10 +7,6 @@ export const authorReducer = (state = initAuthor, action) => {
     case actionTypes.SET_AUTHORS:
       console.log("In SET Authors!!");
       return action.payload;
-    // case actionTypes.ADD_AUTHOR:
-    // console.log("In Add Author Reducer..");
-    // return [...state, action.payload];
-    // return state;
     default:
       return state;
   }

@@ -1,74 +1,72 @@
 .login {
-    /* background-color: #FF5A5F; */
-    background-color: #80a7a2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 92vh;
-    color: whitesmoke;
+  background-color: #80a7a2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 92vh;
+  color: whitesmoke;
 }
 
 .login__heading {
-    margin-top: 8%;
-    margin-bottom: 5%;
+  margin-top: 8%;
+  margin-bottom: 5%;
 }
 
 span {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .login__form form {
-    display: flex;
-    padding: 3rem 4rem;
-    background-color: #ead5dc;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid lightgray;
-    border-radius: 15px;
-    color: lightcoral;
-    font-weight: bold;
+  display: flex;
+  padding: 3rem 4rem;
+  background-color: #ffaaa5;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid lightgray;
+  border-radius: 15px;
+  color: rgb(228, 70, 70);
+  font-weight: bold;
 }
 
 .login__form input {
-    margin-bottom: 0.9rem;
-    width: 500px;
-    padding: 0.6rem;
-    border: none;
-    outline: none;
-    border-radius: 0.3rem;
-    font-size: medium;
+  margin-bottom: 0.9rem;
+  width: 500px;
+  padding: 0.6rem;
+  border: none;
+  outline: none;
+  border-radius: 0.3rem;
+  font-size: medium;
 }
 
 .login__submit {
-    margin-top: 20px !important;
-    color: whitesmoke !important;
+  margin-top: 20px !important;
+  color: whitesmoke !important;
 }
 
 @media only screen and (max-width: 1000px) {
-    .login__form form {
-        padding: 3rem 3.5rem;
-    }
-    .login__form input {
-        width: 400px;
-    }
+  .login__form form {
+    padding: 3rem 3.5rem;
   }
+  .login__form input {
+    width: 400px;
+  }
+}
 
 @media only screen and (max-width: 800px) {
-    .login__form form {
-        padding: 3rem 4rem;
-    }
-    .login__form input {
-        width: 300px;
-    }
+  .login__form form {
+    padding: 3rem 4rem;
   }
-
-  @media only screen and (max-width: 600px) {
-    .login__form form {
-        padding: 3rem 3rem;
-    }
-    .login__form input {
-        width: 200px;
-    }
+  .login__form input {
+    width: 300px;
   }
+}
 
+@media only screen and (max-width: 600px) {
+  .login__form form {
+    padding: 3rem 3rem;
+  }
+  .login__form input {
+    width: 200px;
+  }
+}

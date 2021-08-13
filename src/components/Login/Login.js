@@ -18,8 +18,6 @@ const Login = () => {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((authUser) => {
-        // console.log("User Sign In");
-        // console.log(authUser.user);
         dispatch(signInUser(authUser.user));
       })
       .then(() => history.push("/"))

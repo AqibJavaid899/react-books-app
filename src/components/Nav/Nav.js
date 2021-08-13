@@ -6,7 +6,6 @@ import { signOutUser } from "../../redux/actions/userActions";
 const Nav = () => {
   // Fetching Sign-In User from the Global Store
   let authUser = useSelector((state) => state.userStore);
-  console.log("In Nav Comp : ", authUser);
   const dispatch = useDispatch();
 
   // Logging user out and removing it from the Global Store

@@ -5,14 +5,14 @@
 }
 .home__bookForm form {
   padding: 2rem 3rem;
-  background-color: #ead5dc;
+  background-color: #ffaaa5;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border: 1px solid lightgray;
   border-radius: 15px;
-  color: lightcoral;
+  color: rgb(228, 70, 70);
   font-weight: bold;
   margin-bottom: 40px;
 }
@@ -117,7 +117,8 @@ select {
   text-align: center;
   background-color: #e50914;
   padding: 25px;
-  /* transform: translateY(0%); */
+  transition-delay: 2500ms;
+  transition-property: margin-right;
 }
 
 .home__drawerButtons {
