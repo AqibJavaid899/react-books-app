@@ -2,6 +2,7 @@
   display: flex;
   flex: 1;
   transition: 1s all ease;
+  height: 100%;
 }
 .home__bookForm form {
   padding: 2rem 3rem;
@@ -117,8 +118,6 @@ select {
   text-align: center;
   background-color: #c43239;
   padding: 25px;
-  transition-delay: 2500ms;
-  transition-property: margin-right;
 }
 
 .home__drawerButtons {
@@ -144,6 +143,7 @@ select {
   margin-top: 15%;
   text-align: left;
   color: whitesmoke;
+  flex-wrap: wrap;
 }
 
 .home__drawerHeading {
@@ -159,4 +159,14 @@ select {
 .home__drawerList {
   margin: 30px 40px;
   text-transform: uppercase;
+}
+
+@media only screen and (max-width: 600px) {
+  .home__drawer {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+  .home__drawerHeading {
+    font-size: 1.1rem;
+  }
 }
