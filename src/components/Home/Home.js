@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
-import { db, auth } from "../../firebase.js";
 import { Button } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { selectedAuthorBooks } from "../../utils/helperFunctions";
 import {
   addBookToStore,
-  clearBooksFromStore,
   deleteBookFromStore,
   setBooksStore,
 } from "../../redux/actions/bookActions";
 import { setAuthorsStore } from "../../redux/actions/authorActions";
-import firebase from "firebase";
 
 const Home = () => {
   const [bookName, setBookName] = useState("");
@@ -20,7 +17,6 @@ const Home = () => {
   const [isClicked, setIsClicked] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [authorBookList, setAuthorBookList] = useState([]);
-  // const [books, setBooks] = useState([]);
 
   const dispatch = useDispatch();
   let authUser = useSelector((state) => state.userStore);
@@ -30,10 +26,6 @@ const Home = () => {
   let books = useSelector((state) => [
     ...new Map(state.bookStore.map((book) => [book["id"], book])).values(),
   ]);
-  // books = [...new Set(books)];
-  // [...new Set(state.bookStore)]
-  console.log("Books List from Redux is : ", books);
-  console.log("Authors List from Redux is : ", authors);
 
   useEffect(() => {
     dispatch(setBooksStore());
@@ -42,16 +34,12 @@ const Home = () => {
 
   const addBook = async (e) => {
     e.preventDefault();
-    console.log("In Add Book Function...");
     dispatch(addBookToStore(books, bookName, genre, author));
     setBookName("");
     setGenre("");
     setAuthor("");
   };
   const bookSelected = async (selectedBook) => {
-    console.log("Selected Book is : ", selectedBook);
-    console.log("Authors are : ", authors);
-
     setSelectedBook(selectedBook);
     setIsClicked(true);
     setAuthorBookList(selectedAuthorBooks(selectedBook, books));
@@ -75,14 +63,14 @@ const Home = () => {
             )}
           </div>
           <div className="home__bookList">
-            {books.map((book) => (
+            {books?.map((book) => (
               <div className="home__bookData" key={book?.docId}>
                 <Button
                   onClick={() => bookSelected(book || null)}
                   variant="outlined"
                   color="primary"
                 >
-                  {book.book.name}
+                  {book?.book?.name}
                 </Button>
               </div>
             ))}
@@ -118,7 +106,7 @@ const Home = () => {
                   setAuthor(e.target.value);
                 }}
               >
-                {authors.map(({ id, name }) => (
+                {authors?.map(({ id, name }) => (
                   <option id={id} value={name}>
                     {name}
                   </option>

@@ -9,12 +9,10 @@ export const setAuthorsStore = () => async (dispatch) => {
       authors.push({ id: doc.id, name: doc.data().name })
     );
   });
-  // console.log("Authors array in action creators : ", authors);
   dispatch({ type: actionTypes.SET_AUTHORS, payload: authors });
 };
 
 export const addAuthorToStore = (authorName) => async (dispatch) => {
-  // console.log("In Add Author Action");
   db.collection("author")
     .add({
       name: authorName,
