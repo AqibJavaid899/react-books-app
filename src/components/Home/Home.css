@@ -84,7 +84,7 @@ select {
   margin-bottom: 5%;
   font-size: 1rem;
   text-align: center;
-  color: grey;
+  color: #ae0a46;
 }
 
 .home__bookList {
@@ -96,7 +96,7 @@ select {
 }
 
 .home__bookData {
-  color: red;
+  color: #ff5a5f;
   margin: 0.5rem;
   border-radius: 0.5rem;
 }
@@ -115,7 +115,7 @@ select {
   flex-direction: column;
   justify-content: space-between;
   text-align: center;
-  background-color: #ff8b94;
+  background-color: #e50914;
   padding: 25px;
   /* transform: translateY(0%); */
 }

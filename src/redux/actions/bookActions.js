@@ -3,45 +3,34 @@ import { db } from "../../firebase";
 import firebase from "firebase";
 
 export const setBooksStore = () => async (dispatch) => {
+  console.log("FROM FIREBASE!!");
   let books = [];
-  db.collection("books")
-    .orderBy("timestamp", "desc")
-    .onSnapshot((snapshot) => {
-      snapshot.docs.map((doc) => books.push({ id: doc.id, book: doc.data() }));
-    });
+  db.collection("books").onSnapshot((snapshot) => {
+    snapshot.docs.map((doc) => books.push({ id: doc.id, book: doc.data() }));
+  });
   console.log("From SET BOOK ACTION Functions : ", books);
   dispatch({ type: actionTypes.SET_BOOKS, payload: books });
 };
 
 export const addBookToStore =
-  (books, id, bookName, genre, author) => async (dispatch) => {
-    let ID = 0;
+  (books, bookName, genre, author) => async (dispatch) => {
+    console.log("ADD BOOKS ACTIONS...");
+    let ID = null;
     const bookNames = books.map((book) => book.book.name);
     if (!bookNames.includes(bookName)) {
-      await db
-        .collection("books")
+      db.collection("books")
         .add({
-          docId: id,
           name: bookName,
           genre: genre,
           author: author,
           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         })
-        .then((docRef) => {
-          ID = docRef.id;
-          // console.log("ID is of type : ", typeof(ID));
-        })
-        .then(() =>
+        .then((docRef) =>
           dispatch({
             type: actionTypes.ADD_BOOK,
             payload: {
-              id: ID,
-              book: {
-                docId: id,
-                name: bookName,
-                genre: genre,
-                author: author,
-              },
+              id: docRef.id,
+              book: { name: bookName, genre: genre, author: author },
             },
           })
         );

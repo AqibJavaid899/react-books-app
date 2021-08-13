@@ -24,16 +24,18 @@ export const addAuthorToStore = (authorName) => async (dispatch) => {
       name: authorName,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     })
-    .then((docRef) => {
-      ID = docRef.id;
-    })
-    .then(() =>
-      dispatch({
-        type: actionTypes.ADD_AUTHOR,
-        payload: {
-          id: ID,
-          name: authorName,
-        },
-      })
-    );
+    .then(() => {});
+  // dispatch({ type: actionTypes.ADD_AUTHOR, payload: {} });
+  // .then((docRef) => {
+  //   ID = docRef.id;
+  // })
+  // .then(() =>
+  //   dispatch({
+  //     type: actionTypes.ADD_AUTHOR,
+  //     payload: {
+  //       id: ID,
+  //       name: authorName,
+  //     },
+  //   })
+  // );
 };

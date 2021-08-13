@@ -25,7 +25,7 @@ export const authStateChanged = (dispatch, authUser) => {
 
 export const selectedAuthorBooks = (selectedBook, books) => {
   return books
-    .flatMap((book) =>
+    ?.flatMap((book) =>
       book?.book?.author === selectedBook?.book?.author &&
       selectedBook?.book?.name !== book?.book?.name
         ? book?.book?.name

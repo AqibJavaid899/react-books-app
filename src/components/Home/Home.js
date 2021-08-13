@@ -6,46 +6,49 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectedAuthorBooks } from "../../utils/helperFunctions";
 import {
   addBookToStore,
+  clearBooksFromStore,
   deleteBookFromStore,
   setBooksStore,
 } from "../../redux/actions/bookActions";
-import { v4 as uuidv4 } from "uuid";
 import { setAuthorsStore } from "../../redux/actions/authorActions";
+import firebase from "firebase";
 
 const Home = () => {
-  // const [books, setBooks] = useState([]);
   const [bookName, setBookName] = useState("");
   const [genre, setGenre] = useState("");
-  // const [authors, setAuthors] = useState([]);
   const [author, setAuthor] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [authorBookList, setAuthorBookList] = useState([]);
+  // const [books, setBooks] = useState([]);
 
-  let authUser = useSelector((state) => state.userStore);
-  let authors = useSelector((state) => state.authorStore);
-  console.log("Authors List from Redux is : ", authors);
   const dispatch = useDispatch();
-  let books = useSelector((state) => state.bookStore);
-  console.log("Books Data from Redux is : ", books);
-  authors.map((auth) => console.log(auth.name));
+  let authUser = useSelector((state) => state.userStore);
+
+  let authors = useSelector((state) => state.authorStore);
+
+  let books = useSelector((state) => [
+    ...new Map(state.bookStore.map((book) => [book["id"], book])).values(),
+  ]);
+  // books = [...new Set(books)];
+  // [...new Set(state.bookStore)]
+  console.log("Books List from Redux is : ", books);
+  console.log("Authors List from Redux is : ", authors);
 
   useEffect(() => {
     dispatch(setBooksStore());
     dispatch(setAuthorsStore());
   }, [dispatch]);
 
-  const addBook = (e) => {
+  const addBook = async (e) => {
     e.preventDefault();
-    let id = uuidv4();
-    dispatch(addBookToStore(books, id, bookName, genre, author));
-    // dispatch(setBooksStore())
+    console.log("In Add Book Function...");
+    dispatch(addBookToStore(books, bookName, genre, author));
     setBookName("");
     setGenre("");
     setAuthor("");
   };
-
-  const bookSelected = (selectedBook) => {
+  const bookSelected = async (selectedBook) => {
     console.log("Selected Book is : ", selectedBook);
     console.log("Authors are : ", authors);
 
@@ -56,10 +59,7 @@ const Home = () => {
 
   const deleteBook = (e) => {
     e.preventDefault();
-    // console.log("Book ID is of type : ",typeof(selectedBook.id))
     dispatch(deleteBookFromStore(selectedBook.id));
-
-    // dispatch(setBooksStore());
     setIsClicked(false);
   };
 
@@ -71,14 +71,14 @@ const Home = () => {
             {Object.keys(authUser).length === 0 ? (
               <h2>Reading List for Users!</h2>
             ) : (
-              <h2>{`Hey ${authUser.displayName}, Reading List for you!`}</h2>
+              <h2>{`Reading List for ${authUser.displayName}!`}</h2>
             )}
           </div>
           <div className="home__bookList">
             {books.map((book) => (
-              <div className="home__bookData" key={book.docId}>
+              <div className="home__bookData" key={book?.docId}>
                 <Button
-                  onClick={() => bookSelected(book)}
+                  onClick={() => bookSelected(book || null)}
                   variant="outlined"
                   color="primary"
                 >
