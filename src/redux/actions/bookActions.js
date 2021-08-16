@@ -12,9 +12,10 @@ export const setBooksStore = () => async (dispatch) => {
 
 export const addBookToStore =
   (books, bookName, genre, author) => async (dispatch) => {
-    const bookNames = books.map((book) => book.book.name);
+    const bookNames = await books.map((book) => book.book.name.toUpperCase());
     if (!bookNames.includes(bookName)) {
-      db.collection("books")
+      await db
+        .collection("books")
         .add({
           name: bookName,
           genre: genre,

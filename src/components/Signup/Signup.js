@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import "./Signup.css";
 import { useHistory } from "react-router-dom";
 import { userSignUp } from "../../utils/helperFunctions";
-import { useDispatch } from "react-redux";
 
 const Signup = () => {
   const [name, setName] = useState("");

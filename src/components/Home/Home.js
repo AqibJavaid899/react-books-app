@@ -23,9 +23,10 @@ const Home = () => {
 
   let authors = useSelector((state) => state.authorStore);
 
-  let books = useSelector((state) => [
-    ...new Map(state.bookStore.map((book) => [book["id"], book])).values(),
-  ]);
+  let books = useSelector((state) =>
+    //state.bookStore);
+    [...new Map(state.bookStore.map((book) => [book["id"], book])).values()]
+  );
 
   useEffect(() => {
     dispatch(setBooksStore());

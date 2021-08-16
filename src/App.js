@@ -1,14 +1,18 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Nav from "./components/Nav/Nav";
-import Home from "./components/Home/Home";
-import Signup from "./components/Signup/Signup";
-import Login from "./components/Login/Login";
-import AuthorForm from "./components/addAuthor/AuthorForm";
 import { auth } from "./firebase";
 import { authStateChanged } from "./utils/helperFunctions";
 import { useDispatch } from "react-redux";
+import { LinearProgress } from "@material-ui/core";
+
+const Nav = React.lazy(() => import("./components/Nav/Nav"));
+const Home = React.lazy(() => import("./components/Home/Home"));
+const Signup = React.lazy(() => import("./components/Signup/Signup"));
+const Login = React.lazy(() => import("./components/Login/Login"));
+const AuthorForm = React.lazy(() =>
+  import("./components/addAuthor/AuthorForm")
+);
 
 function App() {
   const dispatch = useDispatch();
@@ -23,15 +27,17 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
-        <Nav />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/signup" exact component={Signup} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/addAuthor" exact component={AuthorForm} />
-        </Switch>
-      </Router>
+      <React.Suspense fallback={<LinearProgress color="secondary" />}>
+        <Router>
+          <Nav />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/signup" exact component={Signup} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/addAuthor" exact component={AuthorForm} />
+          </Switch>
+        </Router>
+      </React.Suspense>
     </div>
   );
 }

@@ -18,6 +18,7 @@
   color: whitesmoke;
   font-weight: bold;
   margin-bottom: 40px;
+  opacity: 0.8;
 }
 
 .home__bookForm input,
@@ -110,6 +111,10 @@ select {
 
 .home__bookData Button:hover {
   text-decoration: underline !important;
+}
+
+.home__bookAuthor {
+  text-align: center;
 }
 
 .home__drawer {
