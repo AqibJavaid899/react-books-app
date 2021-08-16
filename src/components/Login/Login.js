@@ -1,10 +1,10 @@
 import { Button } from "@material-ui/core";
 import React, { useState } from "react";
-import "./Login.css";
 import { auth } from "../../firebase";
 import { useDispatch } from "react-redux";
 import { signInUser } from "../../redux/actions/userActions";
 import { useHistory } from "react-router-dom";
+import "./Login.css";
 
 const Login = () => {
   const history = useHistory();
