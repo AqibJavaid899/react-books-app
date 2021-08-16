@@ -3,6 +3,8 @@
   flex: 1;
   transition: 1s all ease;
   height: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 .home__bookForm form {
   padding: 2rem 3rem;
