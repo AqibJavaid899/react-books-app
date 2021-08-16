@@ -6,14 +6,14 @@
 }
 .home__bookForm form {
   padding: 2rem 3rem;
-  background-color: #ffaaa5;
+  background-color: #524848;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border: 1px solid lightgray;
   border-radius: 15px;
-  color: rgb(228, 70, 70);
+  color: whitesmoke;
   font-weight: bold;
   margin-bottom: 40px;
 }

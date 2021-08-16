@@ -43,7 +43,7 @@ const AuthorForm = () => {
                 }}
                 className="author__submit"
                 variant="contained"
-                color="primary"
+                color="secondary"
               >
                 Create Author
               </Button>

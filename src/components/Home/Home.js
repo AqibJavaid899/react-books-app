@@ -120,7 +120,7 @@ const Home = () => {
                 }}
                 className="home__submit"
                 variant="contained"
-                color="primary"
+                color="secondary"
               >
                 Add Book
               </Button>

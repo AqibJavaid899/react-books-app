@@ -9,8 +9,8 @@
 
 .author__heading {
   margin-top: 8%;
-  margin-bottom: 5%;
-  color: grey;
+  margin-bottom: 3%;
+  color: rgb(221, 57, 57);
 }
 
 span {
@@ -20,13 +20,13 @@ span {
 .author__form form {
   display: flex;
   padding: 3rem 4rem;
-  background-color: #ffaaa5;
+  background-color: #524848;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid lightgray;
+  border: 1px solid rgb(209, 207, 207);
   border-radius: 15px;
-  color: rgb(228, 70, 70);
+  color: whitesmoke;
   font-weight: bold;
 }
 
