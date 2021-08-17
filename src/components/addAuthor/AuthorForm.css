@@ -1,5 +1,5 @@
 .author {
-  background-color: #ecdedc;
+  background-color: #f1f5f8;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,7 +10,7 @@
 .author__heading {
   margin-top: 8%;
   margin-bottom: 3%;
-  color: rgb(221, 57, 57);
+  color: #db3448;
 }
 
 span {
@@ -19,22 +19,24 @@ span {
 
 .author__form form {
   display: flex;
-  padding: 3rem 4rem;
-  background-color: #524848;
+  padding: 2rem 3rem;
+  background-color: #f9e4f3;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border: 1px solid rgb(209, 207, 207);
   border-radius: 15px;
-  color: whitesmoke;
+  color: #db3448;
   font-weight: bold;
+  box-shadow: inset 0px 0px 0px 1px lightgrey;
+  transition: all 0.6s ease;
 }
 
 .author__form input {
   margin-bottom: 0.9rem;
   width: 500px;
   padding: 0.6rem;
-  border: none;
+  border: 0.5px solid lightgrey;
   outline: none;
   border-radius: 0.3rem;
   font-size: medium;
@@ -48,7 +50,7 @@ span {
 
 @media only screen and (max-width: 1000px) {
   .author__form form {
-    padding: 3rem 4rem;
+    padding: 2rem 3rem;
   }
   .author__form input {
     width: 400px;
@@ -57,7 +59,7 @@ span {
 
 @media only screen and (max-width: 800px) {
   .author__form form {
-    padding: 3rem 3.8rem;
+    padding: 1.5rem 2.5rem;
   }
   .author__form input {
     width: 300px;
@@ -66,7 +68,7 @@ span {
 
 @media only screen and (max-width: 600px) {
   .author__form form {
-    padding: 3rem 3.5rem;
+    padding: 1.3rem 2.3rem;
   }
   .author__form input {
     width: 200px;

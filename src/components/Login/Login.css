@@ -1,10 +1,10 @@
 .login {
-  background-color: #ecdedc;
+  background-color: #f1f5f8;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 92vh;
-  color: rgb(221, 57, 57);
+  color: #db3448;
 }
 
 .login__heading {
@@ -20,25 +20,27 @@ span {
 .login__form form {
   display: flex;
   padding: 3rem 4rem;
-  background-color: #524848;
+  background-color: #f9e4f3;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid lightgray;
   border-radius: 15px;
-  color: whitesmoke;
+  color: #db3448;
   font-weight: bold;
   font-size: medium;
+  box-shadow: inset 0px 0px 0px 1px lightgrey;
+  transition: all 0.6s ease;
 }
 
 .login__form input {
   margin-bottom: 0.9rem;
   width: 500px;
   padding: 0.6rem;
-  border: none;
+  border: 0.5px solid lightgrey;
   outline: none;
   border-radius: 0.3rem;
   font-size: medium;
+  text-align: center;
 }
 
 .login__submit {

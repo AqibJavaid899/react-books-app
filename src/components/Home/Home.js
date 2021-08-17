@@ -66,13 +66,9 @@ const Home = () => {
           <div className="home__bookList">
             {books?.map((book) => (
               <div className="home__bookData" key={book?.docId}>
-                <Button
-                  onClick={() => bookSelected(book || null)}
-                  variant="outlined"
-                  color="primary"
-                >
+                <button onClick={() => bookSelected(book || null)}>
                   {book?.book?.name}
-                </Button>
+                </button>
               </div>
             ))}
           </div>
@@ -152,7 +148,7 @@ const Home = () => {
               color="primary"
               onClick={() => setIsClicked(false)}
             >
-              Close Drawer
+              Close
             </Button>
             {!(Object.keys(authUser).length === 0) ? (
               <Button
@@ -161,7 +157,7 @@ const Home = () => {
                 variant="contained"
                 onClick={(e) => deleteBook(e)}
               >
-                Delete Book
+                Delete
               </Button>
             ) : null}
           </div>
