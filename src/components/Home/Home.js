@@ -20,13 +20,8 @@ const Home = () => {
 
   const dispatch = useDispatch();
   let authUser = useSelector((state) => state.userStore);
-
   let authors = useSelector((state) => state.authorStore);
-
-  let books = useSelector((state) =>
-    //state.bookStore);
-    [...new Map(state.bookStore.map((book) => [book["id"], book])).values()]
-  );
+  let books = useSelector((state) => state.bookStore);
 
   useEffect(() => {
     dispatch(setBooksStore());
