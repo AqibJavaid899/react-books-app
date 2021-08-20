@@ -11,7 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 // Action Creators
 import { deleteBookFromStore } from "../../Redux/Actions/bookActions";
 
-const Books = ({ setIsClicked, selectedBook, authorBookList }) => {
+const Books = ({ setOpen, selectedBook, authorBookList }) => {
   const dispatch = useDispatch();
   let authUser = useSelector((state) => state.userStore);
 
@@ -26,48 +26,47 @@ const Books = ({ setIsClicked, selectedBook, authorBookList }) => {
       draggable: true,
       progress: undefined,
     });
-    setIsClicked(false);
+    setOpen(false);
   };
 
   return (
-    <>
-      <div className="home__drawer">
-        <div className="home__drawerContent">
-          <h2 className="home__drawerHeading">{selectedBook.book.name}</h2>
-          <div className="home__drawerInfo">
-            <h4>{selectedBook.book.genre}</h4>
-            <h4>{selectedBook.book.author}</h4>
-            <h4>All books by this Author:</h4>
-            {authorBookList.map((book) => (
-              <ul className="home__drawerList">
-                <li key={book}>{book}</li>
-              </ul>
-            ))}
-          </div>
-        </div>
-        <div className="home__drawerButtons">
-          <Button
-            className="home__closeDrawer"
-            variant="contained"
-            color="primary"
-            onClick={() => setIsClicked(false)}
-          >
-            Close
-          </Button>
-          {!(Object.keys(authUser).length === 0) ? (
-            <Button
-              className="home__deleteBook"
-              color="secondary"
-              variant="contained"
-              onClick={(e) => deleteBook(e)}
-            >
-              Delete
-            </Button>
-          ) : null}
+    <div className="home__drawer">
+      <div className="home__drawerContent">
+        <h2 className="home__drawerHeading">{selectedBook.book.name}</h2>
+        <div className="home__drawerInfo">
+          <h4>{selectedBook.book.genre}</h4>
+          <h4>{selectedBook.book.author}</h4>
+          <h4>All books by this Author:</h4>
+          {authorBookList.map((book) => (
+            <ul className="home__drawerList">
+              <li key={book}>{book}</li>
+            </ul>
+          ))}
         </div>
       </div>
-      <ToastContainer />
-    </>
+      <div className="home__drawerButtons">
+        <Button
+          className="home__closeDrawer"
+          variant="contained"
+          color="primary"
+          onClick={() => setOpen(false)}
+        >
+          Close
+        </Button>
+        <ToastContainer />
+
+        {!(Object.keys(authUser).length === 0) ? (
+          <Button
+            className="home__deleteBook"
+            color="secondary"
+            variant="contained"
+            onClick={(e) => deleteBook(e)}
+          >
+            Delete
+          </Button>
+        ) : null}
+      </div>
+    </div>
   );
 };
 

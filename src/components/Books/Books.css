@@ -8,6 +8,7 @@
   padding: 25px;
   transition: all 2s ease;
   border: 1px rgb(221, 126, 126) solid;
+  height: 92vh;
 }
 
 .home__drawerButtons {

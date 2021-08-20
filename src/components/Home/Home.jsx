@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Home.css";
 
 // Calling Book Componenet
 import Books from "../Books/Books";
 // Button component from Material UI
-import { Button } from "@material-ui/core";
+import { Button, ClickAwayListener } from "@material-ui/core";
 // Hooks from React Redux
 import { useSelector, useDispatch } from "react-redux";
 // Utility function
@@ -21,9 +21,10 @@ const Home = () => {
   const [bookName, setBookName] = useState("");
   const [genre, setGenre] = useState("");
   const [author, setAuthor] = useState([]);
-  const [isClicked, setIsClicked] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [authorBookList, setAuthorBookList] = useState([]);
+  const [open, setOpen] = useState(false);
+  const btnRef = useRef();
 
   const dispatch = useDispatch();
   let authUser = useSelector((state) => state.userStore);
@@ -34,6 +35,10 @@ const Home = () => {
     dispatch(setBooksStore());
     dispatch(setAuthorsStore());
   }, [dispatch]);
+
+  const handleClickAway = () => {
+    setOpen(false);
+  };
 
   const addBook = (e) => {
     e.preventDefault();
@@ -52,9 +57,10 @@ const Home = () => {
     setAuthor("");
   };
   const bookSelected = (selectedBook) => {
+    setOpen(true);
     setSelectedBook(selectedBook);
-    setIsClicked(true);
     setAuthorBookList(selectedAuthorBooks(selectedBook, books));
+    console.log("Open is : ", open);
   };
 
   return (
@@ -134,14 +140,19 @@ const Home = () => {
           ) : null}
         </div>
       </div>
-
-      {isClicked ? (
-        <Books
-          setIsClicked={setIsClicked}
-          selectedBook={selectedBook}
-          authorBookList={authorBookList}
-        />
-      ) : null}
+      <ClickAwayListener onClickAway={handleClickAway}>
+        <>
+          {open ? (
+            <div>
+              <Books
+                setOpen={setOpen}
+                selectedBook={selectedBook}
+                authorBookList={authorBookList}
+              />
+            </div>
+          ) : null}
+        </>
+      </ClickAwayListener>
     </div>
   );
 };
