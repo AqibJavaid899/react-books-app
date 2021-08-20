@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signOutUser } from "../../redux/actions/userActions";
 
+// Importing modules from React Toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Nav = () => {
   // Fetching Sign-In User from the Global Store
   let authUser = useSelector((state) => state.userStore);
@@ -12,44 +16,56 @@ const Nav = () => {
   const logOut = (e) => {
     e.preventDefault();
     dispatch(signOutUser());
+    toast.success("Logout process is completed!", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   return (
-    <div className="nav">
-      <div className="nav__left">
-        <Link to="/">
-          <button className="nav__leftHeading">We Love Books!</button>
-        </Link>
-      </div>
-      <div className="nav__right">
-        {!(Object.keys(authUser).length === 0) ? (
-          <Link to="/addAuthor">
-            <button className="nav__addAuthor">Add Author</button>
+    <>
+      <div className="nav">
+        <div className="nav__left">
+          <Link to="/">
+            <button className="nav__leftHeading">We Love Books!</button>
           </Link>
-        ) : null}
+        </div>
+        <div className="nav__right">
+          {!(Object.keys(authUser).length === 0) ? (
+            <Link to="/addAuthor">
+              <button className="nav__addAuthor">Add Author</button>
+            </Link>
+          ) : null}
 
-        {Object.keys(authUser).length === 0 ? (
-          <Link to="/login">
-            <button className="nav__login">Login</button>
-          </Link>
-        ) : null}
-        {Object.keys(authUser).length === 0 ? (
-          <Link to="/signup">
-            <button className="nav__signup">Sign Up</button>
-          </Link>
-        ) : null}
-        {!(Object.keys(authUser).length === 0) ? (
-          <button
-            onClick={(e) => {
-              logOut(e);
-            }}
-            className="nav__logout"
-          >
-            Logout
-          </button>
-        ) : null}
+          {Object.keys(authUser).length === 0 ? (
+            <Link to="/login">
+              <button className="nav__login">Login</button>
+            </Link>
+          ) : null}
+          {Object.keys(authUser).length === 0 ? (
+            <Link to="/signup">
+              <button className="nav__signup">Sign Up</button>
+            </Link>
+          ) : null}
+          {!(Object.keys(authUser).length === 0) ? (
+            <button
+              onClick={(e) => {
+                logOut(e);
+              }}
+              className="nav__logout"
+            >
+              Logout
+            </button>
+          ) : null}
+        </div>
       </div>
-    </div>
+      <ToastContainer />
+    </>
   );
 };
 

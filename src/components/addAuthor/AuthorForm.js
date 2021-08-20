@@ -5,6 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { addAuthorToStore } from "../../redux/actions/authorActions";
 
+// Importing modules from React Toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const AuthorForm = () => {
   const [author, setAuthor] = useState("");
 
@@ -14,7 +18,16 @@ const AuthorForm = () => {
 
   const addAuthor = async (e) => {
     e.preventDefault();
-    await dispatch(addAuthorToStore(author));
+    dispatch(addAuthorToStore(author));
+    toast.dark("New Author is Added!", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
     setAuthor("");
   };
 
@@ -60,6 +73,7 @@ const AuthorForm = () => {
           }}
         />
       )}
+      <ToastContainer />
     </div>
   );
 };

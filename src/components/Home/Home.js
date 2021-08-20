@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
 import { Button } from "@material-ui/core";
+
+// Importing Hooks from React Redux
 import { useSelector, useDispatch } from "react-redux";
+
+// Importing utility function
 import { selectedAuthorBooks } from "../../utils/helperFunctions";
+
+// Importing Action Creators
 import {
   addBookToStore,
   deleteBookFromStore,
   setBooksStore,
 } from "../../redux/actions/bookActions";
 import { setAuthorsStore } from "../../redux/actions/authorActions";
+
+// Importing modules from React Toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const [bookName, setBookName] = useState("");
@@ -31,6 +41,15 @@ const Home = () => {
   const addBook = async (e) => {
     e.preventDefault();
     dispatch(addBookToStore(books, bookName, genre, author));
+    toast.dark("New Book is Added!", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
     setBookName("");
     setGenre("");
     setAuthor("");
@@ -44,6 +63,15 @@ const Home = () => {
   const deleteBook = (e) => {
     e.preventDefault();
     dispatch(deleteBookFromStore(selectedBook.id));
+    toast.dark("Selected Book is deleted!", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
     setIsClicked(false);
   };
 
@@ -116,6 +144,7 @@ const Home = () => {
               >
                 Add Book
               </Button>
+              <ToastContainer />
             </form>
           ) : null}
         </div>

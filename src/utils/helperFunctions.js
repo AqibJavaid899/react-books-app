@@ -1,7 +1,7 @@
 import { auth } from "../firebase";
 import { signInUser, signOutUser } from "../redux/actions/userActions";
 
-export const userSignUp = (name, email, password, history) => {
+export const userSignUp = (name, email, password, history, toast) => {
   auth
     .createUserWithEmailAndPassword(email, password)
     .then((authUser) => {
@@ -9,8 +9,33 @@ export const userSignUp = (name, email, password, history) => {
         displayName: name,
       });
     })
-    .then(() => history.push("/login"))
-    .catch((err) => alert(err.message));
+    .then(() =>
+      toast.success("Signup Successful!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+    )
+    .then(() =>
+      setTimeout(() => {
+        history.push("/login");
+      }, 3000)
+    )
+    .catch((err) =>
+      toast.error(err.message, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+    );
 };
 
 export const authStateChanged = (dispatch, authUser) => {

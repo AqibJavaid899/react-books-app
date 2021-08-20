@@ -4,6 +4,9 @@ import "./Signup.css";
 import { useHistory } from "react-router-dom";
 import { userSignUp } from "../../utils/helperFunctions";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,7 +16,7 @@ const Signup = () => {
   const signUp = (e) => {
     e.preventDefault();
     // Calling Helper Functions for creating user account
-    userSignUp(name, email, password, history);
+    userSignUp(name, email, password, history, toast);
 
     setName("");
     setEmail("");
@@ -63,6 +66,7 @@ const Signup = () => {
           >
             Create Account
           </Button>
+          <ToastContainer />
         </form>
       </div>
     </div>

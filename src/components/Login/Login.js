@@ -1,10 +1,15 @@
 import { Button } from "@material-ui/core";
 import React, { useState } from "react";
+import "./Login.css";
+
 import { auth } from "../../firebase";
 import { useDispatch } from "react-redux";
 import { signInUser } from "../../redux/actions/userActions";
 import { useHistory } from "react-router-dom";
-import "./Login.css";
+
+// Importing modules from React Toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const history = useHistory();
@@ -14,14 +19,40 @@ const Login = () => {
 
   const signIn = (e) => {
     e.preventDefault();
-
+    try {
+    } catch (error) {}
     auth
       .signInWithEmailAndPassword(email, password)
       .then((authUser) => {
         dispatch(signInUser(authUser.user));
       })
-      .then(() => history.push("/"))
-      .catch((err) => alert(err.message));
+      .then(() =>
+        toast.success("Login Successful!", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      )
+      .then(() =>
+        setTimeout(() => {
+          history.push("/");
+        }, 3000)
+      )
+      .catch((err) =>
+        toast.error(err.message, {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        })
+      );
 
     setEmail("");
     setPassword("");
@@ -64,6 +95,7 @@ const Login = () => {
           >
             Login
           </Button>
+          <ToastContainer />
         </form>
       </div>
     </div>
