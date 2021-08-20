@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css";
 
 // Calling Book Componenet
 import Books from "../Books/Books";
 // Button component from Material UI
-import { Button, ClickAwayListener } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 // Hooks from React Redux
 import { useSelector, useDispatch } from "react-redux";
 // Utility function
@@ -24,7 +24,6 @@ const Home = () => {
   const [selectedBook, setSelectedBook] = useState(null);
   const [authorBookList, setAuthorBookList] = useState([]);
   const [open, setOpen] = useState(false);
-  const btnRef = useRef();
 
   const dispatch = useDispatch();
   let authUser = useSelector((state) => state.userStore);
@@ -60,7 +59,6 @@ const Home = () => {
     setOpen(true);
     setSelectedBook(selectedBook);
     setAuthorBookList(selectedAuthorBooks(selectedBook, books));
-    console.log("Open is : ", open);
   };
 
   return (
@@ -118,7 +116,7 @@ const Home = () => {
                   Choose your Author
                 </option>
                 {authors?.map(({ id, name }) => (
-                  <option selected="Aqib Javaid" id={id} value={name}>
+                  <option id={id} value={name}>
                     {name}
                   </option>
                 ))}
@@ -140,19 +138,15 @@ const Home = () => {
           ) : null}
         </div>
       </div>
-      <ClickAwayListener onClickAway={handleClickAway}>
-        <>
-          {open ? (
-            <div>
-              <Books
-                setOpen={setOpen}
-                selectedBook={selectedBook}
-                authorBookList={authorBookList}
-              />
-            </div>
-          ) : null}
-        </>
-      </ClickAwayListener>
+      {open ? (
+        <div>
+          <Books
+            setOpen={setOpen}
+            selectedBook={selectedBook}
+            authorBookList={authorBookList}
+          />
+        </div>
+      ) : null}
     </div>
   );
 };
