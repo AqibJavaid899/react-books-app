@@ -1,4 +1,6 @@
+// Calling Constant Object from Constants File
 import { actionTypes } from "../constants";
+// Functions from Firebase
 import { db } from "../../firebase";
 import { firestore } from "../../firebase";
 import firebase from "firebase";

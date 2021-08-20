@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
 
+// Calling Book Componenet
+import Books from "../Books/Books";
 // Button component from Material UI
 import { Button } from "@material-ui/core";
 // Hooks from React Redux
@@ -8,11 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 // Utility function
 import { selectedAuthorBooks } from "../../Utilities/helperFunctions";
 // Action Creators
-import {
-  addBookToStore,
-  deleteBookFromStore,
-  setBooksStore,
-} from "../../Redux/Actions/bookActions";
+import { addBookToStore, setBooksStore } from "../../Redux/Actions/bookActions";
 import { setAuthorsStore } from "../../Redux/Actions/authorActions";
 
 // Functions from React Toastify
@@ -57,20 +55,6 @@ const Home = () => {
     setSelectedBook(selectedBook);
     setIsClicked(true);
     setAuthorBookList(selectedAuthorBooks(selectedBook, books));
-  };
-
-  const deleteBook = (e) => {
-    dispatch(deleteBookFromStore(selectedBook.id));
-    toast.dark("Selected Book is deleted!", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-    setIsClicked(false);
   };
 
   return (
@@ -124,8 +108,11 @@ const Home = () => {
                   setAuthor(e.target.value);
                 }}
               >
+                <option value="" selected disabled hidden>
+                  Choose your Author
+                </option>
                 {authors?.map(({ id, name }) => (
-                  <option id={id} value={name}>
+                  <option selected="Aqib Javaid" id={id} value={name}>
                     {name}
                   </option>
                 ))}
@@ -149,41 +136,11 @@ const Home = () => {
       </div>
 
       {isClicked ? (
-        <div className="home__drawer">
-          <div className="home__drawerContent">
-            <h2 className="home__drawerHeading">{selectedBook.book.name}</h2>
-            <div className="home__drawerInfo">
-              <h4>{selectedBook.book.genre}</h4>
-              <h4>{selectedBook.book.author}</h4>
-              <h4>All books by this Author:</h4>
-              {authorBookList.map((book) => (
-                <ul className="home__drawerList">
-                  <li key={book}>{book}</li>
-                </ul>
-              ))}
-            </div>
-          </div>
-          <div className="home__drawerButtons">
-            <Button
-              className="home__closeDrawer"
-              variant="contained"
-              color="primary"
-              onClick={() => setIsClicked(false)}
-            >
-              Close
-            </Button>
-            {!(Object.keys(authUser).length === 0) ? (
-              <Button
-                className="home__deleteBook"
-                color="secondary"
-                variant="contained"
-                onClick={(e) => deleteBook(e)}
-              >
-                Delete
-              </Button>
-            ) : null}
-          </div>
-        </div>
+        <Books
+          setIsClicked={setIsClicked}
+          selectedBook={selectedBook}
+          authorBookList={authorBookList}
+        />
       ) : null}
     </div>
   );

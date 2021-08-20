@@ -1,4 +1,6 @@
+// Calling Constant Object from Constants File
 import { actionTypes } from "../constants";
+// Functions from Firebase
 import { auth } from "../../firebase";
 
 export const signInUser = (authUser) => async (dispatch) => {
