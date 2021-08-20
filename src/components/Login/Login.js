@@ -1,13 +1,17 @@
-import { Button } from "@material-ui/core";
 import React, { useState } from "react";
 import "./Login.css";
 
+// Button Component from Material UI
+import { Button } from "@material-ui/core";
+// Auth from Firebase
 import { auth } from "../../firebase";
+// Hook from React-Redux
 import { useDispatch } from "react-redux";
-import { signInUser } from "../../redux/actions/userActions";
+// Action Creators
+import { signInUser } from "../../Redux/Actions/userActions";
+// Hook from React-Router-DOM
 import { useHistory } from "react-router-dom";
-
-// Importing modules from React Toastify
+// Functions from React Toastify
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -29,7 +33,7 @@ const Login = () => {
       .then(() =>
         toast.success("Login Successful!", {
           position: "top-center",
-          autoClose: 2000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -40,7 +44,7 @@ const Login = () => {
       .then(() =>
         setTimeout(() => {
           history.push("/");
-        }, 3000)
+        }, 1000)
       )
       .catch((err) =>
         toast.error(err.message, {

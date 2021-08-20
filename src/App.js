@@ -2,17 +2,15 @@ import React, { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { auth } from "./firebase";
-import { authStateChanged } from "./utils/helperFunctions";
+import { authStateChanged } from "./Utilities/helperFunctions";
 import { useDispatch } from "react-redux";
 import { LinearProgress } from "@material-ui/core";
 
-const Nav = React.lazy(() => import("./components/Nav/Nav"));
-const Home = React.lazy(() => import("./components/Home/Home"));
-const Signup = React.lazy(() => import("./components/Signup/Signup"));
-const Login = React.lazy(() => import("./components/Login/Login"));
-const AuthorForm = React.lazy(() =>
-  import("./components/addAuthor/AuthorForm")
-);
+const Nav = React.lazy(() => import("./Components/Navigation/Navigation"));
+const Home = React.lazy(() => import("./Components/Home/Home"));
+const Signup = React.lazy(() => import("./Components/Signup/Signup"));
+const Login = React.lazy(() => import("./Components/Login/Login"));
+const Author = React.lazy(() => import("./Components/Author/Author"));
 
 function App() {
   const dispatch = useDispatch();
@@ -34,7 +32,7 @@ function App() {
             <Route path="/" exact component={Home} />
             <Route path="/signup" exact component={Signup} />
             <Route path="/login" exact component={Login} />
-            <Route path="/addAuthor" exact component={AuthorForm} />
+            <Route path="/addAuthor" exact component={Author} />
           </Switch>
         </Router>
       </React.Suspense>

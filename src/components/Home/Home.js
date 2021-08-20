@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
+
+// Button component from Material UI
 import { Button } from "@material-ui/core";
-
-// Importing Hooks from React Redux
+// Hooks from React Redux
 import { useSelector, useDispatch } from "react-redux";
-
-// Importing utility function
-import { selectedAuthorBooks } from "../../utils/helperFunctions";
-
-// Importing Action Creators
+// Utility function
+import { selectedAuthorBooks } from "../../Utilities/helperFunctions";
+// Action Creators
 import {
   addBookToStore,
   deleteBookFromStore,
   setBooksStore,
-} from "../../redux/actions/bookActions";
-import { setAuthorsStore } from "../../redux/actions/authorActions";
+} from "../../Redux/Actions/bookActions";
+import { setAuthorsStore } from "../../Redux/Actions/authorActions";
 
-// Importing modules from React Toastify
+// Functions from React Toastify
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -38,13 +37,13 @@ const Home = () => {
     dispatch(setAuthorsStore());
   }, [dispatch]);
 
-  const addBook = async (e) => {
+  const addBook = (e) => {
     e.preventDefault();
     dispatch(addBookToStore(books, bookName, genre, author));
     toast.dark("New Book is Added!", {
-      position: "top-center",
+      position: "top-right",
       autoClose: 2000,
-      hideProgressBar: false,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
@@ -54,19 +53,18 @@ const Home = () => {
     setGenre("");
     setAuthor("");
   };
-  const bookSelected = async (selectedBook) => {
+  const bookSelected = (selectedBook) => {
     setSelectedBook(selectedBook);
     setIsClicked(true);
     setAuthorBookList(selectedAuthorBooks(selectedBook, books));
   };
 
   const deleteBook = (e) => {
-    e.preventDefault();
     dispatch(deleteBookFromStore(selectedBook.id));
     toast.dark("Selected Book is deleted!", {
-      position: "top-center",
+      position: "top-right",
       autoClose: 2000,
-      hideProgressBar: false,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,

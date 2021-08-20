@@ -1,28 +1,31 @@
-import { Button } from "@material-ui/core";
 import React, { useState } from "react";
-import "./AuthorForm.css";
-import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { addAuthorToStore } from "../../redux/actions/authorActions";
+import "./Author.css";
 
-// Importing modules from React Toastify
+// Button Component from Material UI
+import { Button } from "@material-ui/core";
+// Hooks from React Redux
+import { useSelector, useDispatch } from "react-redux";
+// Function from React-Router-DOM
+import { Redirect } from "react-router-dom";
+// Action Creators
+import { addAuthorToStore } from "../../Redux/Actions/authorActions";
+// Functions from React Toastify
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const AuthorForm = () => {
+const Author = () => {
   const [author, setAuthor] = useState("");
 
   // Fetching Sign-In User from the Global Store
   let authUser = useSelector((state) => state.userStore);
   const dispatch = useDispatch();
 
-  const addAuthor = async (e) => {
-    e.preventDefault();
+  const addAuthor = (e) => {
     dispatch(addAuthorToStore(author));
     toast.dark("New Author is Added!", {
-      position: "top-center",
+      position: "top-right",
       autoClose: 2000,
-      hideProgressBar: false,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
@@ -78,4 +81,4 @@ const AuthorForm = () => {
   );
 };
 
-export default AuthorForm;
+export default Author;

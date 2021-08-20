@@ -1,9 +1,12 @@
-import "./Nav.css";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { signOutUser } from "../../redux/actions/userActions";
+import "./Navigation.css";
 
-// Importing modules from React Toastify
+// Function from React-Router-DOM
+import { Link } from "react-router-dom";
+// Hooks from React Redux
+import { useSelector, useDispatch } from "react-redux";
+// Action Creator
+import { signOutUser } from "../../Redux/Actions/userActions";
+// Functions from React Toastify
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -14,7 +17,6 @@ const Nav = () => {
 
   // Logging user out and removing it from the Global Store
   const logOut = (e) => {
-    e.preventDefault();
     dispatch(signOutUser());
     toast.success("Logout process is completed!", {
       position: "top-center",

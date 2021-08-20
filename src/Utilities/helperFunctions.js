@@ -1,5 +1,5 @@
 import { auth } from "../firebase";
-import { signInUser, signOutUser } from "../redux/actions/userActions";
+import { signInUser, signOutUser } from "../Redux/Actions/userActions";
 
 export const userSignUp = (name, email, password, history, toast) => {
   auth

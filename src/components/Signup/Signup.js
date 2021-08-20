@@ -1,9 +1,13 @@
-import { Button } from "@material-ui/core";
 import React, { useState } from "react";
 import "./Signup.css";
-import { useHistory } from "react-router-dom";
-import { userSignUp } from "../../utils/helperFunctions";
 
+// Button Component from Material UI
+import { Button } from "@material-ui/core";
+// Hook from React-Router-DOM
+import { useHistory } from "react-router-dom";
+// Utility function
+import { userSignUp } from "../../Utilities/helperFunctions";
+// Functions from React Toastify
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
