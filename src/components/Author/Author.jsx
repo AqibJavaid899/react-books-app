@@ -12,6 +12,7 @@ import { addAuthorToStore } from "../../Redux/Actions/authorActions";
 // Functions from React Toastify
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { darkReactToastify } from "../../Utilities/repetitveFragments";
 
 const Author = () => {
   const [author, setAuthor] = useState("");
@@ -22,15 +23,7 @@ const Author = () => {
 
   const addAuthor = (e) => {
     dispatch(addAuthorToStore(author));
-    toast.dark("New Author is Added!", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+    darkReactToastify("New Author is Added!");
     setAuthor("");
   };
 

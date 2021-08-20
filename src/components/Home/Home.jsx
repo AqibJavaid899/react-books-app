@@ -16,6 +16,10 @@ import { setAuthorsStore } from "../../Redux/Actions/authorActions";
 // Functions from React Toastify
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {
+  darkReactToastify,
+  reactToastify,
+} from "../../Utilities/repetitveFragments";
 
 const Home = () => {
   const [bookName, setBookName] = useState("");
@@ -35,22 +39,10 @@ const Home = () => {
     dispatch(setAuthorsStore());
   }, [dispatch]);
 
-  const handleClickAway = () => {
-    setOpen(false);
-  };
-
   const addBook = (e) => {
     e.preventDefault();
     dispatch(addBookToStore(books, bookName, genre, author));
-    toast.dark("New Book is Added!", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+    darkReactToastify("New Book is Added!");
     setBookName("");
     setGenre("");
     setAuthor("");

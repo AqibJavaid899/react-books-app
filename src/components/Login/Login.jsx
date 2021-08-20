@@ -14,6 +14,10 @@ import { useHistory } from "react-router-dom";
 // Functions from React Toastify
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {
+  errorReactToastify,
+  successReactToastify,
+} from "../../Utilities/repetitveFragments";
 
 const Login = () => {
   const history = useHistory();
@@ -30,33 +34,13 @@ const Login = () => {
       .then((authUser) => {
         dispatch(signInUser(authUser.user));
       })
-      .then(() =>
-        toast.success("Login Successful!", {
-          position: "top-center",
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        })
-      )
+      .then(() => successReactToastify("Login Successful!"))
       .then(() =>
         setTimeout(() => {
           history.push("/");
-        }, 1000)
+        }, 1800)
       )
-      .catch((err) =>
-        toast.error(err.message, {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        })
-      );
+      .catch((err) => errorReactToastify(err.message));
 
     setEmail("");
     setPassword("");

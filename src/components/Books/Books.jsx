@@ -6,10 +6,11 @@ import { Button } from "@material-ui/core";
 // Hooks from React Redux
 import { useSelector, useDispatch } from "react-redux";
 // Functions from React Toastify
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // Action Creators
 import { deleteBookFromStore } from "../../Redux/Actions/bookActions";
+import { darkReactToastify } from "../../Utilities/repetitveFragments";
 
 const Books = ({ setOpen, selectedBook, authorBookList }) => {
   const dispatch = useDispatch();
@@ -17,15 +18,7 @@ const Books = ({ setOpen, selectedBook, authorBookList }) => {
 
   const deleteBook = (e) => {
     dispatch(deleteBookFromStore(selectedBook.id));
-    toast.dark("Selected Book is deleted!", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+    darkReactToastify("Selected Book is deleted!");
     setOpen(false);
   };
 

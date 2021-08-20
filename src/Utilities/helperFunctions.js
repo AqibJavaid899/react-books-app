@@ -1,5 +1,6 @@
 import { auth } from "../firebase";
 import { signInUser, signOutUser } from "../Redux/Actions/userActions";
+import { errorReactToastify, successReactToastify } from "./repetitveFragments";
 
 export const userSignUp = (name, email, password, history, toast) => {
   auth
@@ -9,33 +10,13 @@ export const userSignUp = (name, email, password, history, toast) => {
         displayName: name,
       });
     })
-    .then(() =>
-      toast.success("Signup Successful!", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      })
-    )
+    .then(() => successReactToastify("Signup Successful!"))
     .then(() =>
       setTimeout(() => {
-        history.push("/login");
-      }, 3000)
+        history.push("/");
+      }, 1800)
     )
-    .catch((err) =>
-      toast.error(err.message, {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      })
-    );
+    .catch((err) => errorReactToastify(err.message));
 };
 
 export const authStateChanged = (dispatch, authUser) => {

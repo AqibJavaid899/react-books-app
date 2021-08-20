@@ -7,8 +7,9 @@ import { useSelector, useDispatch } from "react-redux";
 // Action Creator
 import { signOutUser } from "../../Redux/Actions/userActions";
 // Functions from React Toastify
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { successReactToastify } from "../../Utilities/repetitveFragments";
 
 const Nav = () => {
   // Fetching Sign-In User from the Global Store
@@ -18,15 +19,7 @@ const Nav = () => {
   // Logging user out and removing it from the Global Store
   const logOut = (e) => {
     dispatch(signOutUser());
-    toast.success("Logout process is completed!", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+    successReactToastify("Logout process is completed!");
   };
 
   return (
