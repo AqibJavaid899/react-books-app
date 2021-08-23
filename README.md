@@ -1,6 +1,10 @@
-# Getting Started with Create React App
+# React Book Catalogue Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This application allows authenticated users to add or remove books by genre and author. The front-end side of the app was built with React, and for state management, Redux Thunk was used. For back-end and authentication, Firebase Firestore and Firebase Authentication have been used.
+
+#### Live Project Link : https://react-books-catalog.web.app/
+
+
 
 ## Available Scripts
 
